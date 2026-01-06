@@ -132,7 +132,7 @@ export default function GameScreen({ navigation, route }: Props) {
       </View>
 
       {/* お題表示モーダル */}
-      <Modal visible={showTopic && phase === 'hint'} transparent animationType="fade">
+      <Modal visible={showTopic && phase === 'hint'} transparent={true} animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>お題</Text>
@@ -190,7 +190,7 @@ export default function GameScreen({ navigation, route }: Props) {
             elements={kanjiElements}
             onUpdateElement={updateKanjiElement}
             onRemoveElement={removeKanjiElement}
-            readOnly
+            readOnly={true}
           />
 
           <AnswerInput answer={answer} onChangeAnswer={setAnswer} />
@@ -204,7 +204,7 @@ export default function GameScreen({ navigation, route }: Props) {
       {/* スコアボード */}
       <View style={styles.scoreboard}>
         <Text style={styles.scoreboardTitle}>スコア</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {players.map((player, idx) => (
             <View
               key={player.id}

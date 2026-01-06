@@ -27,7 +27,7 @@ export default function KanjiSelector({ onSelectKanji }: Props) {
         <Text style={styles.buttonText}>漢字を追加</Text>
       </TouchableOpacity>
 
-      <Modal visible={showModal} animationType="slide" transparent>
+      <Modal visible={showModal} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
