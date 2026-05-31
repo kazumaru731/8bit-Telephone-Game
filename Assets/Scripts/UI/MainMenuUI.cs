@@ -77,7 +77,12 @@ namespace KanjiFlipGame.UI
 
             _readyButton.onClick.AddListener(OnReadyClicked);
             _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
-            _leaveRoomButton.onClick.AddListener(OnLeaveRoomClicked); // 追加
+            
+            if (_leaveRoomButton != null)
+            {
+                _leaveRoomButton.onClick.RemoveAllListeners();
+                _leaveRoomButton.onClick.AddListener(OnLeaveRoomClicked);
+            }
 
             // ネットワークイベントの登録
             NetworkLauncher.Instance.OnFriendRoomFound += OnFriendRoomFound;
