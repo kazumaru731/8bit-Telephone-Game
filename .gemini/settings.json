@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "unity-mcp": {
+      "httpUrl": "http://localhost:8081/mcp",
+      "trust": true
+    }
+  }
+}

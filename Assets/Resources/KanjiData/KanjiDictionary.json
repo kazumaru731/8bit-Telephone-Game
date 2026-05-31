@@ -1,0 +1,2407 @@
+{
+  "kanjiList": [
+    {
+      "char": "一",
+      "readings": [
+        "いち",
+        "いつ",
+        "ひと"
+      ],
+      "strokeCount": 1,
+      "grade": 1
+    },
+    {
+      "char": "右",
+      "readings": [
+        "う",
+        "ゆう",
+        "みぎ"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "雨",
+      "readings": [
+        "う",
+        "あめ",
+        "あま"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "円",
+      "readings": [
+        "えん",
+        "まるい"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "王",
+      "readings": [
+        "おう"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "音",
+      "readings": [
+        "おん",
+        "いん",
+        "おと",
+        "ね"
+      ],
+      "strokeCount": 9,
+      "grade": 1
+    },
+    {
+      "char": "下",
+      "readings": [
+        "か",
+        "げ",
+        "した",
+        "しも",
+        "もと",
+        "さげる",
+        "さがる",
+        "くだる",
+        "くださる",
+        "おろす",
+        "おりる"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "火",
+      "readings": [
+        "か",
+        "ひ",
+        "ほ"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "花",
+      "readings": [
+        "か",
+        "はな"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "貝",
+      "readings": [
+        "かい"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "学",
+      "readings": [
+        "がく",
+        "まなぶ"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "気",
+      "readings": [
+        "き",
+        "け"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "九",
+      "readings": [
+        "きゅう",
+        "く",
+        "ここの",
+        "ここのつ"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "休",
+      "readings": [
+        "きゅう",
+        "やすむ",
+        "やすまる",
+        "やすめる"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "玉",
+      "readings": [
+        "ぎょく",
+        "たま"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "金",
+      "readings": [
+        "きん",
+        "こん",
+        "かね",
+        "かな"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "空",
+      "readings": [
+        "くう",
+        "そら",
+        "あく",
+        "あける",
+        "から",
+        "すく",
+        "すかす"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "月",
+      "readings": [
+        "げつ",
+        "がつ",
+        "つき"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "犬",
+      "readings": [
+        "けん",
+        "いぬ"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "見",
+      "readings": [
+        "けん",
+        "みる",
+        "みえる",
+        "みせる"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "五",
+      "readings": [
+        "ご",
+        "いつ",
+        "いつの"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "口",
+      "readings": [
+        "こう",
+        "く",
+        "くち"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "校",
+      "readings": [
+        "こう"
+      ],
+      "strokeCount": 10,
+      "grade": 1
+    },
+    {
+      "char": "左",
+      "readings": [
+        "さ",
+        "ひだり"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "三",
+      "readings": [
+        "さん",
+        "み",
+        "みつ",
+        "みっつ"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "山",
+      "readings": [
+        "さん",
+        "やま"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "子",
+      "readings": [
+        "し",
+        "す",
+        "こ",
+        "ね"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "四",
+      "readings": [
+        "し",
+        "よ",
+        "よつ",
+        "よっつ",
+        "よん"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "糸",
+      "readings": [
+        "し",
+        "いと"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "字",
+      "readings": [
+        "じ",
+        "あざ"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "耳",
+      "readings": [
+        "じ",
+        "みみ"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "七",
+      "readings": [
+        "しち",
+        "なな",
+        "ななつ",
+        "なの"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "車",
+      "readings": [
+        "しゃ",
+        "くるま"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "手",
+      "readings": [
+        "しゅ",
+        "て",
+        "た"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "十",
+      "readings": [
+        "じゅう",
+        "じっ",
+        "とお",
+        "と"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "出",
+      "readings": [
+        "しゅつ",
+        "すい",
+        "でる",
+        "だす"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "女",
+      "readings": [
+        "じょ",
+        "にょ",
+        "にょう",
+        "おんな",
+        "め"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "小",
+      "readings": [
+        "しょう",
+        "ちいさい",
+        "こ",
+        "お"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "上",
+      "readings": [
+        "じょう",
+        "しょう",
+        "うえ",
+        "うわ",
+        "かみ",
+        "あげる",
+        "あがる",
+        "のぼる",
+        "のぼせる",
+        "のぼす"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "森",
+      "readings": [
+        "しん",
+        "もり"
+      ],
+      "strokeCount": 12,
+      "grade": 1
+    },
+    {
+      "char": "人",
+      "readings": [
+        "じん",
+        "にん",
+        "ひと"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "水",
+      "readings": [
+        "すい",
+        "みず"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "正",
+      "readings": [
+        "せい",
+        "しょう",
+        "ただしい",
+        "ただす",
+        "まさ"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "生",
+      "readings": [
+        "せい",
+        "しょう",
+        "いきる",
+        "いかす",
+        "いける",
+        "うまれる",
+        "うむ",
+        "おう",
+        "はえる",
+        "はやす",
+        "き",
+        "なま"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "青",
+      "readings": [
+        "せい",
+        "しょう",
+        "あお",
+        "あおい"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "夕",
+      "readings": [
+        "せき",
+        "ゆう"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "石",
+      "readings": [
+        "せき",
+        "しゃく",
+        "こく",
+        "いし"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "赤",
+      "readings": [
+        "せき",
+        "しゃく",
+        "あか",
+        "あかい",
+        "あからむ",
+        "あからめる"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "千",
+      "readings": [
+        "せん",
+        "ち"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "川",
+      "readings": [
+        "せん",
+        "かわ"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "先",
+      "readings": [
+        "せん",
+        "さき"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "早",
+      "readings": [
+        "そう",
+        "はやい",
+        "はめる"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "草",
+      "readings": [
+        "そう",
+        "くさ"
+      ],
+      "strokeCount": 9,
+      "grade": 1
+    },
+    {
+      "char": "足",
+      "readings": [
+        "そく",
+        "あし",
+        "たる",
+        "たりる",
+        "たす"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "村",
+      "readings": [
+        "そん",
+        "むら"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "大",
+      "readings": [
+        "だい",
+        "たい",
+        "おお",
+        "おおきい",
+        "おいに"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "男",
+      "readings": [
+        "だん",
+        "なん",
+        "おとこ"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "竹",
+      "readings": [
+        "ちく",
+        "たけ"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "中",
+      "readings": [
+        "ちゅう",
+        "なか"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "虫",
+      "readings": [
+        "ちゅう",
+        "むし"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "町",
+      "readings": [
+        "ちょう",
+        "まち"
+      ],
+      "strokeCount": 7,
+      "grade": 1
+    },
+    {
+      "char": "天",
+      "readings": [
+        "てん",
+        "あめ",
+        "あま"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "田",
+      "readings": [
+        "でん",
+        "た"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "土",
+      "readings": [
+        "ど",
+        "と",
+        "つち"
+      ],
+      "strokeCount": 3,
+      "grade": 1
+    },
+    {
+      "char": "二",
+      "readings": [
+        "に",
+        "ふた",
+        "ふたつ"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "日",
+      "readings": [
+        "にち",
+        "じつ",
+        "ひ",
+        "か"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "入",
+      "readings": [
+        "にゅう",
+        "じゅ",
+        "はいる",
+        "いれる"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "年",
+      "readings": [
+        "ねん",
+        "とし"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "白",
+      "readings": [
+        "はく",
+        "びゃく",
+        "しろ",
+        "しら",
+        "しろい"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "八",
+      "readings": [
+        "はち",
+        "や",
+        "やつ",
+        "やっつ",
+        "よう"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "百",
+      "readings": [
+        "ひゃく"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "文",
+      "readings": [
+        "ぶん",
+        "もん",
+        "ふみ"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "木",
+      "readings": [
+        "もく",
+        "ぼく",
+        "き",
+        "こ"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "本",
+      "readings": [
+        "ほん",
+        "もと"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "名",
+      "readings": [
+        "めい",
+        "みょう",
+        "な"
+      ],
+      "strokeCount": 6,
+      "grade": 1
+    },
+    {
+      "char": "目",
+      "readings": [
+        "もく",
+        "ぼく",
+        "め",
+        "ま"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "立",
+      "readings": [
+        "りつ",
+        "りゅう",
+        "たつ",
+        "たてる"
+      ],
+      "strokeCount": 5,
+      "grade": 1
+    },
+    {
+      "char": "力",
+      "readings": [
+        "りょく",
+        "りき",
+        "ちから"
+      ],
+      "strokeCount": 2,
+      "grade": 1
+    },
+    {
+      "char": "林",
+      "readings": [
+        "りん",
+        "はやし"
+      ],
+      "strokeCount": 8,
+      "grade": 1
+    },
+    {
+      "char": "六",
+      "readings": [
+        "ろく",
+        "む",
+        "むつ",
+        "むっつ",
+        "むい"
+      ],
+      "strokeCount": 4,
+      "grade": 1
+    },
+    {
+      "char": "引",
+      "readings": [
+        "いん",
+        "ひく",
+        "ひける"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "羽",
+      "readings": [
+        "う",
+        "は",
+        "はね"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "雲",
+      "readings": [
+        "うん",
+        "くも"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "園",
+      "readings": [
+        "えん",
+        "その"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "遠",
+      "readings": [
+        "えん",
+        "おん",
+        "とおい"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "何",
+      "readings": [
+        "か",
+        "なに",
+        "なん"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "科",
+      "readings": [
+        "か"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "夏",
+      "readings": [
+        "か",
+        "げ",
+        "なつ"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "家",
+      "readings": [
+        "か",
+        "け",
+        "いえ",
+        "や",
+        "うち"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "歌",
+      "readings": [
+        "か",
+        "うた",
+        "うたう"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "画",
+      "readings": [
+        "が",
+        "かく"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "回",
+      "readings": [
+        "かい",
+        "え",
+        "まわる",
+        "まわす"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "会",
+      "readings": [
+        "かい",
+        "え",
+        "あう"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "海",
+      "readings": [
+        "かい",
+        "うみ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "絵",
+      "readings": [
+        "かい",
+        "え"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "外",
+      "readings": [
+        "がい",
+        "げ",
+        "そと",
+        "ほか",
+        "はずす",
+        "はずれる"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "角",
+      "readings": [
+        "かく",
+        "かど",
+        "つの"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "楽",
+      "readings": [
+        "らく",
+        "がく",
+        "たのしい",
+        "たのしむ"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "活",
+      "readings": [
+        "かつ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "間",
+      "readings": [
+        "かん",
+        "けん",
+        "あいだ",
+        "ま"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "丸",
+      "readings": [
+        "がん",
+        "まる",
+        "まるい",
+        "まるめる"
+      ],
+      "strokeCount": 3,
+      "grade": 2
+    },
+    {
+      "char": "岩",
+      "readings": [
+        "がん",
+        "いわ"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "顔",
+      "readings": [
+        "がん",
+        "かお"
+      ],
+      "strokeCount": 18,
+      "grade": 2
+    },
+    {
+      "char": "汽",
+      "readings": [
+        "き"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "記",
+      "readings": [
+        "き",
+        "しるす"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "帰",
+      "readings": [
+        "き",
+        "かえる",
+        "かえす"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "弓",
+      "readings": [
+        "きゅう",
+        "ゆみ"
+      ],
+      "strokeCount": 3,
+      "grade": 2
+    },
+    {
+      "char": "牛",
+      "readings": [
+        "ぎゅう",
+        "うし"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "魚",
+      "readings": [
+        "ぎょ",
+        "うお",
+        "さかな"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "京",
+      "readings": [
+        "きょう",
+        "けい",
+        "みやこ"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "強",
+      "readings": [
+        "きょう",
+        "ごう",
+        "つよい",
+        "つよまる",
+        "つよめる",
+        "しいる"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "教",
+      "readings": [
+        "きょう",
+        "おしえる",
+        "おそわる"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "近",
+      "readings": [
+        "きん",
+        "ちかい"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "兄",
+      "readings": [
+        "けい",
+        "きょう",
+        "あに"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "形",
+      "readings": [
+        "けい",
+        "ぎょう",
+        "かたち",
+        "なり"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "計",
+      "readings": [
+        "けい",
+        "はかる",
+        "はからう"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "元",
+      "readings": [
+        "げん",
+        "がん",
+        "もと"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "言",
+      "readings": [
+        "げん",
+        "ごん",
+        "いう",
+        "こと"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "原",
+      "readings": [
+        "げん",
+        "はら"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "戸",
+      "readings": [
+        "こ",
+        "と"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "古",
+      "readings": [
+        "こ",
+        "ふるい",
+        "ふるす"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "午",
+      "readings": [
+        "ご"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "後",
+      "readings": [
+        "ご",
+        "こう",
+        "のち",
+        "うしろ",
+        "あと",
+        "おくれる"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "語",
+      "readings": [
+        "ご",
+        "かたる",
+        "かたらう"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "工",
+      "readings": [
+        "こう",
+        "く"
+      ],
+      "strokeCount": 3,
+      "grade": 2
+    },
+    {
+      "char": "公",
+      "readings": [
+        "こう",
+        "おおやけ"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "広",
+      "readings": [
+        "こう",
+        "ひろい",
+        "ひろまる",
+        "ひろめる",
+        "ひろがる",
+        "ひろげる"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "交",
+      "readings": [
+        "こう",
+        "まじわる",
+        "まじえる",
+        "まじる",
+        "まざる",
+        "まぜる",
+        "かわす",
+        "こもごも"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "光",
+      "readings": [
+        "こう",
+        "ひかり",
+        "ひかる"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "考",
+      "readings": [
+        "こう",
+        "かんがえる"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "行",
+      "readings": [
+        "こう",
+        "ぎょう",
+        "あん",
+        "いく",
+        "ゆく",
+        "おこなう"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "高",
+      "readings": [
+        "こう",
+        "たかい",
+        "たかまる",
+        "たかめる"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "黄",
+      "readings": [
+        "こう",
+        "おう",
+        "き",
+        "こ"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "合",
+      "readings": [
+        "ごう",
+        "がっ",
+        "かっ",
+        "あう",
+        "あわす",
+        "あわせる"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "谷",
+      "readings": [
+        "こく",
+        "たに"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "国",
+      "readings": [
+        "こく",
+        "くに"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "黒",
+      "readings": [
+        "こく",
+        "くろ",
+        "くろい"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "今",
+      "readings": [
+        "こん",
+        "きん",
+        "いま"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "才",
+      "readings": [
+        "さい"
+      ],
+      "strokeCount": 3,
+      "grade": 2
+    },
+    {
+      "char": "細",
+      "readings": [
+        "さい",
+        "ほそい",
+        "ほそる",
+        "こまか",
+        "こまかい"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "作",
+      "readings": [
+        "さく",
+        "さ",
+        "つくる"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "算",
+      "readings": [
+        "さん"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "止",
+      "readings": [
+        "し",
+        "とまる",
+        "とめる"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "市",
+      "readings": [
+        "し",
+        "いち"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "矢",
+      "readings": [
+        "し",
+        "や"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "姉",
+      "readings": [
+        "し",
+        "あね"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "思",
+      "readings": [
+        "し",
+        "おもう"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "紙",
+      "readings": [
+        "し",
+        "かみ"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "寺",
+      "readings": [
+        "じ",
+        "てら"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "自",
+      "readings": [
+        "じ",
+        "し",
+        "みずから"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "時",
+      "readings": [
+        "じ",
+        "とき"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "室",
+      "readings": [
+        "しつ",
+        "むろ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "社",
+      "readings": [
+        "しゃ",
+        "やしろ"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "弱",
+      "readings": [
+        "じゃく",
+        "よわい",
+        "よわる",
+        "よわまる",
+        "よわめる"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "首",
+      "readings": [
+        "しゅ",
+        "くび"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "秋",
+      "readings": [
+        "しゅう",
+        "あき"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "週",
+      "readings": [
+        "しゅう"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "春",
+      "readings": [
+        "しゅん",
+        "はる"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "書",
+      "readings": [
+        "しょ",
+        "かく"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "少",
+      "readings": [
+        "しょう",
+        "すくない",
+        "すこし"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "場",
+      "readings": [
+        "じょう",
+        "ば"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "色",
+      "readings": [
+        "しき",
+        "しょく",
+        "いろ"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "食",
+      "readings": [
+        "しょく",
+        "じき",
+        "くう",
+        "くらう",
+        "たべる"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "心",
+      "readings": [
+        "しん",
+        "こころ"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "新",
+      "readings": [
+        "しん",
+        "あたらしい",
+        "あらた",
+        "にい"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "親",
+      "readings": [
+        "しん",
+        "おや",
+        "したしい",
+        "したしむ"
+      ],
+      "strokeCount": 16,
+      "grade": 2
+    },
+    {
+      "char": "図",
+      "readings": [
+        "ず",
+        "と",
+        "はかる"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "数",
+      "readings": [
+        "すう",
+        "す",
+        "かず",
+        "かぞえる"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "西",
+      "readings": [
+        "せい",
+        "さい",
+        "にし"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "声",
+      "readings": [
+        "せい",
+        "しょう",
+        "こえ"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "星",
+      "readings": [
+        "せい",
+        "しょう",
+        "ほし"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "晴",
+      "readings": [
+        "せい",
+        "はれる",
+        "はらす"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "切",
+      "readings": [
+        "せつ",
+        "さい",
+        "きる",
+        "きれる"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "雪",
+      "readings": [
+        "せつ",
+        "ゆき"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "船",
+      "readings": [
+        "せん",
+        "ふね",
+        "ふな"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "線",
+      "readings": [
+        "せん"
+      ],
+      "strokeCount": 15,
+      "grade": 2
+    },
+    {
+      "char": "前",
+      "readings": [
+        "ぜん",
+        "まえ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "組",
+      "readings": [
+        "そ",
+        "くむ",
+        "くみ"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "走",
+      "readings": [
+        "そ",
+        "はしる"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "多",
+      "readings": [
+        "た",
+        "おおい"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "太",
+      "readings": [
+        "たい",
+        "た",
+        "ふとい",
+        "ふとる"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "体",
+      "readings": [
+        "たい",
+        "てい",
+        "からだ"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "台",
+      "readings": [
+        "だい",
+        "たい"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "地",
+      "readings": [
+        "ち",
+        "じ"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "池",
+      "readings": [
+        "ち",
+        "いけ"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "知",
+      "readings": [
+        "ち",
+        "しる"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "茶",
+      "readings": [
+        "ちゃ",
+        "さ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "昼",
+      "readings": [
+        "ちゅう",
+        "ひる"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "長",
+      "readings": [
+        "ちょう",
+        "ながい"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "鳥",
+      "readings": [
+        "ちょう",
+        "とり"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "朝",
+      "readings": [
+        "ちょう",
+        "あさ"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "直",
+      "readings": [
+        "ちょく",
+        "じき",
+        "ただちに",
+        "なおす",
+        "なおる"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "通",
+      "readings": [
+        "つう",
+        "つ",
+        "とおる",
+        "とおす",
+        "かよう"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "弟",
+      "readings": [
+        "てい",
+        "だい",
+        "で",
+        "おとうと"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "店",
+      "readings": [
+        "てん",
+        "みせ"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "点",
+      "readings": [
+        "てん"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "電",
+      "readings": [
+        "てん"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    },
+    {
+      "char": "刀",
+      "readings": [
+        "とう",
+        "かたな"
+      ],
+      "strokeCount": 2,
+      "grade": 2
+    },
+    {
+      "char": "冬",
+      "readings": [
+        "とう",
+        "ふゆ"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "当",
+      "readings": [
+        "とう",
+        "あたる",
+        "あてる"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "東",
+      "readings": [
+        "とう",
+        "ひがし"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "答",
+      "readings": [
+        "とう",
+        "こたえる",
+        "こたえ"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "頭",
+      "readings": [
+        "とう",
+        "ず",
+        "と",
+        "あたま",
+        "かしら"
+      ],
+      "strokeCount": 16,
+      "grade": 2
+    },
+    {
+      "char": "同",
+      "readings": [
+        "どう",
+        "おなじ"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "道",
+      "readings": [
+        "どう",
+        "とう",
+        "みち"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "読",
+      "readings": [
+        "どく",
+        "とく",
+        "とう",
+        "よむ"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "内",
+      "readings": [
+        "ない",
+        "だい",
+        "うち"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "南",
+      "readings": [
+        "なん",
+        "な",
+        "みなみ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "肉",
+      "readings": [
+        "にく"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "馬",
+      "readings": [
+        "ば",
+        "うま",
+        "ま"
+      ],
+      "strokeCount": 10,
+      "grade": 2
+    },
+    {
+      "char": "売",
+      "readings": [
+        "ばい",
+        "うる",
+        "うれる"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "買",
+      "readings": [
+        "ばい",
+        "かう"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "麦",
+      "readings": [
+        "ばく",
+        "むぎ"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "半",
+      "readings": [
+        "はん",
+        "なかば"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "番",
+      "readings": [
+        "ばん"
+      ],
+      "strokeCount": 12,
+      "grade": 2
+    },
+    {
+      "char": "父",
+      "readings": [
+        "ふ",
+        "ちち"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "風",
+      "readings": [
+        "ふう",
+        "ふ",
+        "かぜ",
+        "かざ"
+      ],
+      "strokeCount": 9,
+      "grade": 2
+    },
+    {
+      "char": "分",
+      "readings": [
+        "ぶん",
+        "ふん",
+        "ぶ",
+        "わける",
+        "わかれる",
+        "わかつ",
+        "わからない"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "聞",
+      "readings": [
+        "ぶん",
+        "もん",
+        "きく",
+        "きこえる"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "米",
+      "readings": [
+        "まい",
+        "べい",
+        "こめ",
+        "よね"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "歩",
+      "readings": [
+        "ほ",
+        "ぶ",
+        "ふ",
+        "あるく",
+        "あゆむ"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "母",
+      "readings": [
+        "ぼ",
+        "はは"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "方",
+      "readings": [
+        "ほう",
+        "かた"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "北",
+      "readings": [
+        "ほく",
+        "きた"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "毎",
+      "readings": [
+        "まい"
+      ],
+      "strokeCount": 6,
+      "grade": 2
+    },
+    {
+      "char": "妹",
+      "readings": [
+        "まい",
+        "いもうと"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "万",
+      "readings": [
+        "まん",
+        "ばん"
+      ],
+      "strokeCount": 3,
+      "grade": 2
+    },
+    {
+      "char": "明",
+      "readings": [
+        "めい",
+        "みょう",
+        "あかり",
+        "あかるい",
+        "あかるむ",
+        "あからむ",
+        "あきらか",
+        "あける",
+        "あく",
+        "あくる"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "鳴",
+      "readings": [
+        "めい",
+        "なる",
+        "ならす",
+        "なく"
+      ],
+      "strokeCount": 14,
+      "grade": 2
+    },
+    {
+      "char": "毛",
+      "readings": [
+        "もう",
+        "け"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "門",
+      "readings": [
+        "もん",
+        "かど"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "夜",
+      "readings": [
+        "や",
+        "よ",
+        "よる"
+      ],
+      "strokeCount": 8,
+      "grade": 2
+    },
+    {
+      "char": "野",
+      "readings": [
+        "え",
+        "の"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "友",
+      "readings": [
+        "ゆう",
+        "とも"
+      ],
+      "strokeCount": 4,
+      "grade": 2
+    },
+    {
+      "char": "用",
+      "readings": [
+        "よう",
+        "もちいる"
+      ],
+      "strokeCount": 5,
+      "grade": 2
+    },
+    {
+      "char": "曜",
+      "readings": [
+        "よう"
+      ],
+      "strokeCount": 18,
+      "grade": 2
+    },
+    {
+      "char": "来",
+      "readings": [
+        "らい",
+        "くる",
+        "きたる",
+        "きたす"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "里",
+      "readings": [
+        "り",
+        "さと"
+      ],
+      "strokeCount": 7,
+      "grade": 2
+    },
+    {
+      "char": "理",
+      "readings": [
+        "り"
+      ],
+      "strokeCount": 11,
+      "grade": 2
+    },
+    {
+      "char": "話",
+      "readings": [
+        "わ",
+        "はなす",
+        "はなし"
+      ],
+      "strokeCount": 13,
+      "grade": 2
+    }
+  ]
+}
