@@ -1,35 +1,46 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Fusion;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KanjiFlipGame.Core
 {
     /// <summary>
     /// ゲーム全体の状態を管理するマネージャー
-    /// シングルトンパターンで実装されています
+    /// 2〜8人の多人数プレイ、ラウンド制、ポイント制を管理します
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class GameManager : NetworkBehaviour
     {
-        private static GameManager _instance;
-        public static GameManager Instance
+        public static GameManager Instance { get; private set; }
+
+        [Networked, OnChangedRender(nameof(OnTopicChangedInternal))]
+        public string CurrentTopic { get; set; } = "";
+
+        [Networked, OnChangedRender(nameof(OnAnswerChangedInternal))]
+        public string LastAnswer { get; set; } = "";
+
+        [Networked, OnChangedRender(nameof(OnStateChangedInternal))]
+        public GameState CurrentState { get; set; } = GameState.Waiting;
+
+        [Networked]
+        public int CurrentRound { get; set; } = 0;
+
+        [Networked]
+        public PlayerRef CurrentAnswerer { get; set; } = PlayerRef.None;
+
+        [Networked, Capacity(8)]
+        public NetworkDictionary<PlayerRef, int> PlayerScores => default;
+
+        // 出題キュー（Shared ModeなのでRPC経由で管理）
+        private List<SubmittedFlip> _submissionQueue = new List<SubmittedFlip>();
+        
+        public struct SubmittedFlip
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("GameManager");
-                    _instance = go.AddComponent<GameManager>();
-                    DontDestroyOnLoad(go);
-                }
-                return _instance;
-            }
+            public PlayerRef Author;
+            public string FlipDataJson;
         }
 
-        [Header("ゲーム設定")]
-        [SerializeField] private string _currentTopic = "";
-        
-        // 現在のゲーム状態
-        private GameState _currentState = GameState.Waiting;
-        
         // ローカルプレイヤーの役割
         private PlayerRole _localPlayerRole = PlayerRole.None;
 
@@ -38,167 +49,213 @@ namespace KanjiFlipGame.Core
         public UnityEvent<PlayerRole> OnPlayerRoleChanged = new UnityEvent<PlayerRole>();
         public UnityEvent<string> OnTopicChanged = new UnityEvent<string>();
         public UnityEvent<bool> OnAnswerResult = new UnityEvent<bool>();
+        public UnityEvent OnScoreUpdated = new UnityEvent();
+        public UnityEvent<string> OnFlipDisplayed = new UnityEvent<string>(); // 追加
 
-        void Awake()
+        public override void Spawned()
         {
-            if (_instance != null && _instance != this)
+            if (Instance == null) Instance = this;
+            Debug.Log("GameManagerがネットワーク上に生成されました");
+        }
+
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+        }
+
+        #region ゲーム進行制御
+
+        /// <summary>
+        /// ホストがゲームを開始する
+        /// </summary>
+        public void Host_StartGame()
+        {
+            if (Object.HasStateAuthority)
             {
-                Destroy(gameObject);
+                CurrentRound = 0;
+                // 全プレイヤーのスコアをリセット
+                foreach (var player in Runner.ActivePlayers)
+                {
+                    PlayerScores.Set(player, 0);
+                }
+                StartNextRound();
+            }
+        }
+
+        /// <summary>
+        /// 次のラウンドを開始
+        /// </summary>
+        private void StartNextRound()
+        {
+            CurrentRound++;
+            if (CurrentRound > 5)
+            {
+                EndGame();
                 return;
             }
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            // 回答者をランダムに選出
+            var players = Runner.ActivePlayers.ToList();
+            CurrentAnswerer = players[Random.Range(0, players.Count)];
+            
+            // お題を自動選出（後でKanjiDatabase連携）
+            CurrentTopic = "太陽"; // 暫定
+            
+            _submissionQueue.Clear();
+            SetGameState(GameState.Questioning);
+            
+            // 各クライアントに役割を通知
+            RPC_UpdateLocalRoles();
         }
 
-        #region ゲーム状態管理
-
-        /// <summary>
-        /// ゲーム状態を変更
-        /// </summary>
-        public void SetGameState(GameState newState)
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RPC_UpdateLocalRoles()
         {
-            if (_currentState != newState)
-            {
-                _currentState = newState;
-                OnGameStateChanged?.Invoke(newState);
-                Debug.Log($"ゲーム状態が変更されました: {newState}");
-            }
+            if (Runner.LocalPlayer == CurrentAnswerer)
+                SetPlayerRole(PlayerRole.Answerer);
+            else
+                SetPlayerRole(PlayerRole.Questioner);
         }
 
-        /// <summary>
-        /// 現在のゲーム状態を取得
-        /// </summary>
-        public GameState CurrentState => _currentState;
+        private void EndGame()
+        {
+            SetGameState(GameState.GameOver);
+            Debug.Log("ゲーム終了。結果発表フェーズへ");
+        }
 
         #endregion
 
-        #region プレイヤー役割管理
+        #region 同期プロパティ通知
 
-        /// <summary>
-        /// ローカルプレイヤーの役割を設定
-        /// </summary>
+        public void SetGameState(GameState newState)
+        {
+            if (CurrentState != newState) CurrentState = newState;
+        }
+
+        private void OnStateChangedInternal()
+        {
+            OnGameStateChanged?.Invoke(CurrentState);
+            Debug.Log($"ゲーム状態が同期されました: {CurrentState}");
+        }
+
+        private void OnTopicChangedInternal()
+        {
+            OnTopicChanged?.Invoke(CurrentTopic);
+        }
+
+        private void OnAnswerChangedInternal()
+        {
+            OnScoreUpdated?.Invoke();
+        }
+
+        #endregion
+
+        #region プレイヤー役割・ポイント管理
+
         public void SetPlayerRole(PlayerRole role)
         {
             if (_localPlayerRole != role)
             {
                 _localPlayerRole = role;
                 OnPlayerRoleChanged?.Invoke(role);
-                Debug.Log($"プレイヤーの役割が設定されました: {role}");
             }
         }
 
-        /// <summary>
-        /// ローカルプレイヤーの役割を取得
-        /// </summary>
         public PlayerRole LocalPlayerRole => _localPlayerRole;
-
-        /// <summary>
-        /// ローカルプレイヤーが出題者かどうか
-        /// </summary>
         public bool IsQuestioner => _localPlayerRole == PlayerRole.Questioner;
-
-        /// <summary>
-        /// ローカルプレイヤーが回答者かどうか
-        /// </summary>
         public bool IsAnswerer => _localPlayerRole == PlayerRole.Answerer;
 
-        #endregion
-
-        #region お題管理
-
-        /// <summary>
-        /// お題を設定（出題者用）
-        /// </summary>
-        public void SetTopic(string topic)
+        public void AddScore(PlayerRef player, int amount)
         {
-            _currentTopic = topic;
-            OnTopicChanged?.Invoke(topic);
-            Debug.Log($"お題が設定されました: {topic}");
+            if (Object.HasStateAuthority)
+            {
+                if (PlayerScores.TryGet(player, out int currentScore))
+                {
+                    PlayerScores.Set(player, currentScore + amount);
+                }
+                else
+                {
+                    PlayerScores.Set(player, amount);
+                }
+            }
         }
 
-        /// <summary>
-        /// 現在のお題を取得
-        /// </summary>
-        public string CurrentTopic => _currentTopic;
+        #endregion
+
+        #region 出題キュー管理
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        public void RPC_SubmitFlip(PlayerRef author, string flipDataJson)
+        {
+            _submissionQueue.Add(new SubmittedFlip { Author = author, FlipDataJson = flipDataJson });
+            
+            // もし誰も出題していなければ即座に回答フェーズへ
+            if (CurrentState == GameState.Questioning)
+            {
+                SetGameState(GameState.Answering);
+                RPC_DisplayNextFlip();
+            }
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RPC_DisplayNextFlip()
+        {
+            if (_submissionQueue.Count > 0)
+            {
+                var flip = _submissionQueue[0];
+                OnFlipDisplayed?.Invoke(flip.FlipDataJson);
+                Debug.Log($"次のフリップを表示: 作者={flip.Author}");
+            }
+        }
 
         #endregion
 
-        #region ゲームフロー制御
+        #region 回答・判定
 
-        /// <summary>
-        /// 新しいゲームを開始
-        /// </summary>
-        public void StartNewGame(PlayerRole playerRole, string topic = "")
+        public void OnAnswererSubmitted(string answer)
         {
-            SetPlayerRole(playerRole);
+            if (IsAnswerer) RPC_SubmitAnswer(Runner.LocalPlayer, answer);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        public void RPC_SubmitAnswer(PlayerRef player, string answer)
+        {
+            LastAnswer = answer;
+            bool isCorrect = answer.Equals(CurrentTopic, System.StringComparison.OrdinalIgnoreCase);
             
-            if (playerRole == PlayerRole.Questioner)
+            if (isCorrect)
             {
-                SetTopic(topic);
-                SetGameState(GameState.Questioning);
+                // 正解：ポイント加算
+                AddScore(CurrentAnswerer, 3);
+                if (_submissionQueue.Count > 0)
+                {
+                    AddScore(_submissionQueue[0].Author, 5);
+                }
+                ShowResult(true);
+                // 次のラウンドへ（少し待機してから）
+                Invoke(nameof(StartNextRound), 3f);
             }
             else
             {
-                SetGameState(GameState.Waiting);
+                // 不正解：次のフリップへ
+                _submissionQueue.RemoveAt(0);
+                if (_submissionQueue.Count > 0)
+                {
+                    RPC_DisplayNextFlip();
+                }
+                else
+                {
+                    // キューが空なら出題待ちに戻る
+                    SetGameState(GameState.Questioning);
+                }
+                OnAnswerResult?.Invoke(false);
             }
         }
 
-        /// <summary>
-        /// 出題者がフリップを完成させた
-        /// </summary>
-        public void OnQuestionerFinished()
-        {
-            if (_localPlayerRole == PlayerRole.Questioner)
-            {
-                SetGameState(GameState.Answering);
-                Debug.Log("出題者がフリップを完成させました。回答者の回答を待っています");
-            }
-        }
-
-        /// <summary>
-        /// 回答者が回答を送信
-        /// </summary>
-        public void OnAnswererSubmitted(string answer)
-        {
-            if (_localPlayerRole == PlayerRole.Answerer)
-            {
-                Debug.Log($"回答者が回答を送信しました: {answer}");
-                // ここで回答を検証（実際にはネットワーク経由で出題者に送信）
-                // 現在はローカルプロトタイプなので直接検証
-                bool isCorrect = CheckAnswer(answer);
-                ShowResult(isCorrect);
-            }
-        }
-
-        /// <summary>
-        /// 回答を検証（簡易版、後でネットワーク対応にする）
-        /// </summary>
-        private bool CheckAnswer(string answer)
-        {
-            // 現在は単純な文字列比較
-            // 後でネットワーク経由で出題者が正誤を判定する仕組みに変更
-            return answer.Equals(_currentTopic, System.StringComparison.OrdinalIgnoreCase);
-        }
-
-        /// <summary>
-        /// 結果を表示
-        /// </summary>
         public void ShowResult(bool isCorrect)
         {
             SetGameState(GameState.ShowingResult);
             OnAnswerResult?.Invoke(isCorrect);
-            Debug.Log($"結果: {(isCorrect ? "正解！" : "不正解")}");
-        }
-
-        /// <summary>
-        /// ゲームをリセット
-        /// </summary>
-        public void ResetGame()
-        {
-            _currentTopic = "";
-            _localPlayerRole = PlayerRole.None;
-            SetGameState(GameState.Waiting);
-            Debug.Log("ゲームがリセットされました");
         }
 
         #endregion

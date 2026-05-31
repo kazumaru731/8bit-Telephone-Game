@@ -173,8 +173,20 @@ namespace KanjiFlipGame.UI
 
         public void OnCompleteClicked()
         {
-            if (_kanjiFlipper.CurrentKanjiCount == 0) return;
-            GameManager.Instance.OnQuestionerFinished();
+            if (_kanjiFlipper == null || _kanjiFlipper.CurrentKanjiCount == 0) return;
+
+            // フリップデータをシリアライズ
+            var flipData = _kanjiFlipper.GetFlipData();
+            string json = JsonUtility.ToJson(flipData);
+
+            // ネットワーク経由で送信（早押しキューに登録）
+            GameManager.Instance.RPC_SubmitFlip(GameManager.Instance.Runner.LocalPlayer, json);
+
+            // 自身は送信完了したので、出題パネルを閉じて待機
+            ShowWaitingPanel("出題済み。判定を待っています...");
+            
+            // ローカルのフリップをクリア
+            _kanjiFlipper.ClearAll();
         }
 
         private void OnGameStateChanged(GameState newState)
@@ -184,12 +196,35 @@ namespace KanjiFlipGame.UI
 
         private void UpdateUI()
         {
+            if (GameManager.Instance.LocalPlayerRole != PlayerRole.Questioner)
+            {
+                HideAllPanels();
+                return;
+            }
+
             GameState currentState = GameManager.Instance.CurrentState;
             switch (currentState)
             {
-                case GameState.Questioning: ShowQuestionerPanel(); break;
-                case GameState.Answering: ShowWaitingPanel("回答者が考えています..."); break;
-                default: HideAllPanels(); break;
+                case GameState.Questioning:
+                    // まだ出題ボタンを押していない場合は出題パネルを表示
+                    if (!_waitingPanel.activeSelf)
+                    {
+                        ShowQuestionerPanel();
+                    }
+                    break;
+
+                case GameState.Answering:
+                    // 出題者が回答中を確認できるよう、状況に応じて表示
+                    // (プラン通りなら、出題済みなら待機パネルにメッセージが出ているはず)
+                    break;
+                
+                case GameState.ShowingResult:
+                    // OnAnswerResultで処理
+                    break;
+
+                default:
+                    HideAllPanels();
+                    break;
             }
         }
 
@@ -241,7 +276,7 @@ namespace KanjiFlipGame.UI
 
         private void OnAnswerResult(bool isCorrect)
         {
-            ShowResultPanel("ダミー回答", isCorrect);
+            ShowResultPanel(GameManager.Instance.LastAnswer, isCorrect);
         }
 
         void OnDestroy()

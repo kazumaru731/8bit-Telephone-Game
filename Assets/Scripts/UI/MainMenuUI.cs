@@ -13,77 +13,74 @@ namespace KanjiFlipGame.UI
     {
         [Header("UI要素")]
         [SerializeField] private GameObject _mainMenuPanel;
-        [SerializeField] private Button _questionerButton;
-        [SerializeField] private Button _answererButton;
-        [SerializeField] private TMP_InputField _topicInputField;
-        [SerializeField] private GameObject _topicInputPanel;
+        [SerializeField] private GameObject _roomWaitingPanel;
+        [SerializeField] private Button _joinButton;
+        [SerializeField] private Button _startGameButton;
+        [SerializeField] private TMP_InputField _roomIdInputField;
+        [SerializeField] private TextMeshProUGUI _statusText;
 
         void Start()
         {
-            // ボタンイベントの設定
-            if (_questionerButton != null)
-                _questionerButton.onClick.AddListener(OnQuestionerButtonClicked);
+            if (_joinButton != null)
+                _joinButton.onClick.AddListener(OnJoinButtonClicked);
                 
-            if (_answererButton != null)
-                _answererButton.onClick.AddListener(OnAnswererButtonClicked);
+            if (_startGameButton != null)
+                _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
 
-            // 初期状態でお題入力パネルを非表示
-            if (_topicInputPanel != null)
-                _topicInputPanel.SetActive(false);
+            if (_roomWaitingPanel != null)
+                _roomWaitingPanel.SetActive(false);
+                
+            if (_startGameButton != null)
+                _startGameButton.gameObject.SetActive(false);
         }
 
-        /// <summary>
-        /// 出題者ボタンが押された
-        /// </summary>
-        public void OnQuestionerButtonClicked()
+        private void Update()
         {
-            // お題入力パネルを表示
-            if (_topicInputPanel != null)
-                _topicInputPanel.SetActive(true);
-        }
-
-        /// <summary>
-        /// お題を確定して出題者としてゲーム開始
-        /// </summary>
-        public void StartAsQuestioner()
-        {
-            string topic = _topicInputField != null ? _topicInputField.text : "テストお題";
-            
-            if (string.IsNullOrEmpty(topic))
+            // ホスト（マスタークライアント）のみゲーム開始ボタンを表示
+            if (_roomWaitingPanel.activeSelf && _startGameButton != null)
             {
-                Debug.LogWarning("お題を入力してください");
-                return;
+                bool isMaster = KanjiFlipGame.Network.NetworkLauncher.Instance.IsMaster;
+                _startGameButton.gameObject.SetActive(isMaster);
+            }
+        }
+
+        /// <summary>
+        /// 入室ボタンが押された
+        /// </summary>
+        public void OnJoinButtonClicked()
+        {
+            string roomId = _roomIdInputField != null ? _roomIdInputField.text : "";
+            
+            if (string.IsNullOrEmpty(roomId))
+            {
+                KanjiFlipGame.Network.NetworkLauncher.Instance.StartRandomMatch(PlayerRole.None);
+            }
+            else
+            {
+                KanjiFlipGame.Network.NetworkLauncher.Instance.StartFriendMatch(roomId, PlayerRole.None);
             }
 
-            // ゲームを開始
-            GameManager.Instance.StartNewGame(PlayerRole.Questioner, topic);
-            
-            // メインメニューを非表示
-            if (_mainMenuPanel != null)
-                _mainMenuPanel.SetActive(false);
+            _mainMenuPanel.SetActive(false);
+            if (_roomWaitingPanel != null) _roomWaitingPanel.SetActive(true);
+            if (_statusText != null) _statusText.text = "接続中...";
         }
 
         /// <summary>
-        /// 回答者ボタンが押された
+        /// ホストがゲーム開始ボタンを押した
         /// </summary>
-        public void OnAnswererButtonClicked()
+        public void OnStartGameButtonClicked()
         {
-            // 回答者としてゲーム開始
-            GameManager.Instance.StartNewGame(PlayerRole.Answerer);
-            
-            // メインメニューを非表示
-            if (_mainMenuPanel != null)
-                _mainMenuPanel.SetActive(false);
+            GameManager.Instance.Host_StartGame();
+            gameObject.SetActive(false);
         }
 
         void OnDestroy()
         {
-            // イベントリスナーのクリーンアップ
-            if (_questionerButton != null)
-                _questionerButton.onClick.RemoveListener(OnQuestionerButtonClicked);
+            if (_joinButton != null)
+                _joinButton.onClick.RemoveListener(OnJoinButtonClicked);
                 
-            if (_answererButton != null)
-                _answererButton.onClick.RemoveListener(OnAnswererButtonClicked);
+            if (_startGameButton != null)
+                _startGameButton.onClick.RemoveListener(OnStartGameButtonClicked);
         }
     }
 }

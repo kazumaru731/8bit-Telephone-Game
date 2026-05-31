@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 1848600272913415290}
   - component: {fileID: 3027389356068505182}
   - component: {fileID: 8692087355061390951}
+  - component: {fileID: 5607566791034187953}
   m_Layer: 0
   m_Name: KanjiElement
   m_TagString: Untagged
@@ -1118,10 +1119,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _kanjiText: {fileID: 7080032895693206675}
-  _resizeButtonsPanel: {fileID: 6232006450794693481}
-  _increaseSizeButton: {fileID: 2206483939672267308}
-  _decreaseSizeButton: {fileID: 293459538177125712}
+  _editControlPanel: {fileID: 0}
+  _deleteButton: {fileID: 0}
+  _rotateClockwiseButton: {fileID: 0}
+  _rotateCounterButton: {fileID: 0}
   _minFontSize: 30
   _maxFontSize: 150
-  _fontSizeStep: 10
-  _rotationSpeed: 100
+  _rotationStep: 15
+--- !u!114 &5607566791034187953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8540580262624936499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2014987768
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0

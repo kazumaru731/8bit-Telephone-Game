@@ -20,9 +20,16 @@ namespace KanjiFlipGame.UI
         [SerializeField] private TMP_InputField _answerInputField;
         [SerializeField] private Button _submitAnswerButton;
         [SerializeField] private TextMeshProUGUI _resultText;
+        [SerializeField] private TextMeshProUGUI _timerText;
+
+        [Header("設定")]
+        [SerializeField] private float _answerTimeLimit = 15f;
 
         [Header("参照")]
         [SerializeField] private KanjiFlipper _kanjiFlipper;
+
+        private float _currentTimerValue;
+        private bool _isTimerActive = false;
 
         void Start()
         {
@@ -33,9 +40,43 @@ namespace KanjiFlipGame.UI
             // GameManagerのイベントを購読
             GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
             GameManager.Instance.OnAnswerResult.AddListener(OnAnswerResult);
+            GameManager.Instance.OnFlipDisplayed.AddListener(DisplayFlipData);
 
             // 初期状態の設定
             UpdateUI();
+        }
+
+        void Update()
+        {
+            if (_isTimerActive)
+            {
+                _currentTimerValue -= Time.deltaTime;
+                UpdateTimerUI();
+
+                if (_currentTimerValue <= 0)
+                {
+                    _currentTimerValue = 0;
+                    _isTimerActive = false;
+                    OnSubmitAnswerClicked(); // タイムアップで自動送信
+                }
+            }
+        }
+
+        /// <summary>
+        /// タイマーUIの表示を更新
+        /// </summary>
+        private void UpdateTimerUI()
+        {
+            if (_timerText != null)
+            {
+                _timerText.text = $"残り時間: {Mathf.CeilToInt(_currentTimerValue)}秒";
+                
+                // 残り時間が少なくなったら赤くするなどの演出も可能
+                if (_currentTimerValue <= 5f)
+                    _timerText.color = Color.red;
+                else
+                    _timerText.color = Color.white;
+            }
         }
 
         /// <summary>
@@ -46,13 +87,8 @@ namespace KanjiFlipGame.UI
             if (_answerInputField == null)
                 return;
 
+            _isTimerActive = false;
             string answer = _answerInputField.text;
-
-            if (string.IsNullOrEmpty(answer))
-            {
-                Debug.LogWarning("回答を入力してください");
-                return;
-            }
 
             // 回答を送信
             GameManager.Instance.OnAnswererSubmitted(answer);
@@ -62,10 +98,28 @@ namespace KanjiFlipGame.UI
         }
 
         /// <summary>
+        /// フリップデータを受信して表示（ネットワーク用）
+        /// </summary>
+        public void DisplayFlipData(string flipDataJson)
+        {
+            if (_kanjiFlipper != null)
+            {
+                FlipData data = JsonUtility.FromJson<FlipData>(flipDataJson);
+                _kanjiFlipper.LoadFlipData(data);
+                ShowAnswererPanel();
+                StartTimer();
+            }
+        }
+
+        /// <summary>
         /// ゲーム状態が変更された時の処理
         /// </summary>
         private void OnGameStateChanged(GameState newState)
         {
+            if (newState == GameState.Questioning)
+            {
+                if (_kanjiFlipper != null) _kanjiFlipper.ClearAll();
+            }
             UpdateUI();
         }
 
@@ -74,30 +128,46 @@ namespace KanjiFlipGame.UI
         /// </summary>
         private void UpdateUI()
         {
+            if (GameManager.Instance.LocalPlayerRole != PlayerRole.Answerer)
+            {
+                HideAllPanels();
+                return;
+            }
+
             GameState currentState = GameManager.Instance.CurrentState;
 
             switch (currentState)
             {
                 case GameState.Waiting:
                 case GameState.Questioning:
-                    // 出題者が考えている間は待機画面
-                    ShowWaitingPanel("出題者が考えています...");
+                    ShowWaitingPanel("出題者がフリップを作成中...");
+                    _isTimerActive = false;
                     break;
 
                 case GameState.Answering:
-                    // 回答フェーズ：回答者パネルを表示
-                    ShowAnswererPanel();
+                    // 実際の表示はGameManagerからの通知を待つ
+                    ShowWaitingPanel("次の出題を待っています...");
                     break;
 
                 case GameState.ShowingResult:
-                    // 結果表示
-                    // OnAnswerResultで処理
+                    _isTimerActive = false;
                     break;
 
                 default:
                     HideAllPanels();
+                    _isTimerActive = false;
                     break;
             }
+        }
+
+        /// <summary>
+        /// タイマーを開始
+        /// </summary>
+        private void StartTimer()
+        {
+            _currentTimerValue = _answerTimeLimit;
+            _isTimerActive = true;
+            UpdateTimerUI();
         }
 
         /// <summary>
@@ -180,17 +250,6 @@ namespace KanjiFlipGame.UI
             ShowResultPanel(isCorrect);
         }
 
-        /// <summary>
-        /// フリップデータを受信して表示（ネットワーク用）
-        /// </summary>
-        public void DisplayFlipData(FlipData flipData)
-        {
-            if (_kanjiFlipper != null)
-            {
-                _kanjiFlipper.LoadFlipData(flipData);
-            }
-        }
-
         void OnDestroy()
         {
             // イベントリスナーのクリーンアップ
@@ -201,6 +260,7 @@ namespace KanjiFlipGame.UI
             {
                 GameManager.Instance.OnGameStateChanged.RemoveListener(OnGameStateChanged);
                 GameManager.Instance.OnAnswerResult.RemoveListener(OnAnswerResult);
+                GameManager.Instance.OnFlipDisplayed.RemoveListener(DisplayFlipData);
             }
         }
     }

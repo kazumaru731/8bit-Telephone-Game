@@ -4,8 +4,8 @@ using UnityEngine;
 namespace KanjiFlipGame.Kanji
 {
     /// <summary>
-    /// フリップ全体を管理するクラス
-    /// 漢字の配置、8文字制限などを管理します
+    /// フリップ全体を管理するクラス（ローカル管理版）
+    /// 出題者が組み立て、完了時にデータを送信します
     /// </summary>
     public class KanjiFlipper : MonoBehaviour
     {
@@ -26,10 +26,11 @@ namespace KanjiFlipGame.Kanji
 
             if (_kanjiElementPrefab == null)
             {
-                Debug.LogError("KanjiElementPrefabが設定されていません！");
+                Debug.LogError("_kanjiElementPrefabが設定されていません！");
                 return null;
             }
 
+            // ローカルで生成
             GameObject kanjiObj = Instantiate(_kanjiElementPrefab, _flipCanvas);
             KanjiElement kanjiElement = kanjiObj.GetComponent<KanjiElement>();
 
@@ -43,13 +44,7 @@ namespace KanjiFlipGame.Kanji
                 kanjiElement.Position = new Vector2(randomX, randomY);
 
                 _kanjiElements.Add(kanjiElement);
-                Debug.Log("漢字「" + kanji + "」を追加しました（" + _kanjiElements.Count + "/" + _maxKanjiCount + "）");
-            }
-            else
-            {
-                Debug.LogError("KanjiElementコンポーネントがPrefabに見つかりません！");
-                Destroy(kanjiObj);
-                return null;
+                Debug.Log("漢字「" + kanji + "」をローカルで追加しました");
             }
 
             return kanjiElement;
@@ -61,7 +56,7 @@ namespace KanjiFlipGame.Kanji
             {
                 _kanjiElements.Remove(element);
                 Destroy(element.gameObject);
-                Debug.Log("漢字を削除しました（" + _kanjiElements.Count + "/" + _maxKanjiCount + "）");
+                Debug.Log("漢字を削除しました");
             }
         }
 
