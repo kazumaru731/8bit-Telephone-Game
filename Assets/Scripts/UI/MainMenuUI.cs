@@ -2,85 +2,280 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using KanjiFlipGame.Core;
+using KanjiFlipGame.Network;
+using System.Collections.Generic;
+using System.Linq;
+using Fusion;
+using System.Threading.Tasks;
 
 namespace KanjiFlipGame.UI
 {
-    /// <summary>
-    /// ゲーム開始前のメインメニューを制御するクラス
-    /// 役割選択（出題者/回答者）とゲーム開始を管理します
-    /// </summary>
     public class MainMenuUI : MonoBehaviour
     {
-        [Header("UI要素")]
-        [SerializeField] private GameObject _mainMenuPanel;
+        [Header("Panels")]
+        [SerializeField] private GameObject _selectionPanel;
+        [SerializeField] private GameObject _friendMatchModePanel; // ホスト/ゲスト選択
+        [SerializeField] private GameObject _friendMatchInputPanel; // ID入力
         [SerializeField] private GameObject _roomWaitingPanel;
-        [SerializeField] private Button _joinButton;
-        [SerializeField] private Button _startGameButton;
+        [SerializeField] private GameObject _confirmationDialog;
+        [SerializeField] private GameObject _consentDialog;
+
+        [Header("Selection Buttons")]
+        [SerializeField] private Button _randomMatchButton;
+        [SerializeField] private Button _friendMatchMenuButton;
+
+        [Header("Friend Match Mode Buttons")]
+        [SerializeField] private Button _hostMatchButton;
+        [SerializeField] private Button _guestMatchButton;
+        [SerializeField] private Button _backToMainFromFriendModeButton;
+
+        [Header("Friend Match Input UI")]
         [SerializeField] private TMP_InputField _roomIdInputField;
+        [SerializeField] private Button _searchRoomButton;
+        [SerializeField] private Button _backToFriendModeButton;
+
+        [Header("Confirmation Dialog UI")]
+        [SerializeField] private TextMeshProUGUI _confirmText;
+        [SerializeField] private Button _confirmJoinButton;
+        [SerializeField] private Button _cancelJoinButton;
+
+        [Header("Consent Dialog UI")]
+        [SerializeField] private TextMeshProUGUI _consetText;
+        [SerializeField] private Button _consentYesButton;
+        [SerializeField] private Button _consentNoButton;
+
+        [Header("Waiting UI")]
+        [SerializeField] private TextMeshProUGUI _roomIdText;
+        [SerializeField] private TextMeshProUGUI _playerCountText;
+        [SerializeField] private Button _readyButton;
+        [SerializeField] private TextMeshProUGUI _readyButtonText;
+        [SerializeField] private Button _startGameButton;
         [SerializeField] private TextMeshProUGUI _statusText;
+
+        private SessionInfo _foundSession;
+        private bool _isFriendMatch = false;
 
         void Start()
         {
-            if (_joinButton != null)
-                _joinButton.onClick.AddListener(OnJoinButtonClicked);
-                
-            if (_startGameButton != null)
-                _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
+            // ボタンイベントの登録
+            _randomMatchButton.onClick.AddListener(OnRandomMatchClicked);
+            _friendMatchMenuButton.onClick.AddListener(() => ShowPanel(_friendMatchModePanel));
+            
+            _hostMatchButton.onClick.AddListener(OnHostMatchClicked);
+            _guestMatchButton.onClick.AddListener(OnGuestMatchClicked);
+            _backToMainFromFriendModeButton.onClick.AddListener(() => ShowPanel(_selectionPanel));
 
-            if (_roomWaitingPanel != null)
-                _roomWaitingPanel.SetActive(false);
-                
-            if (_startGameButton != null)
-                _startGameButton.gameObject.SetActive(false);
+            _searchRoomButton.onClick.AddListener(OnSearchRoomClicked);
+            _backToFriendModeButton.onClick.AddListener(() => ShowPanel(_friendMatchModePanel));
+
+            _confirmJoinButton.onClick.AddListener(OnConfirmJoinClicked);
+            _cancelJoinButton.onClick.AddListener(() => _confirmationDialog.SetActive(false));
+
+            _consentYesButton.onClick.AddListener(() => OnConsentClicked(true));
+            _consentNoButton.onClick.AddListener(() => OnConsentClicked(false));
+
+            _readyButton.onClick.AddListener(OnReadyClicked);
+            _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
+
+            // ネットワークイベントの登録
+            NetworkLauncher.Instance.OnFriendRoomFound += OnFriendRoomFound;
+            NetworkLauncher.Instance.OnFriendRoomNotFound += OnFriendRoomNotFound;
+
+            // 初期状態
+            ShowPanel(_selectionPanel);
+            _confirmationDialog.SetActive(false);
+            _consentDialog.SetActive(false);
         }
 
         private void Update()
         {
-            // ホスト（マスタークライアント）のみゲーム開始ボタンを表示
-            if (_roomWaitingPanel.activeSelf && _startGameButton != null)
+            if (GameManager.Instance == null || NetworkLauncher.Instance.Runner == null) return;
+
+            // 待機画面の更新
+            if (_roomWaitingPanel.activeSelf)
             {
-                bool isMaster = KanjiFlipGame.Network.NetworkLauncher.Instance.IsMaster;
-                _startGameButton.gameObject.SetActive(isMaster);
+                int playerCount = NetworkLauncher.Instance.Runner.ActivePlayers.Count();
+                _playerCountText.text = $"参加人数: {playerCount} 人";
+
+                bool isReady = GameManager.Instance.IsPlayerReady(NetworkLauncher.Instance.Runner.LocalPlayer);
+                _readyButtonText.text = isReady ? "準備解除" : "準備完了";
+
+                // ホストの開始ボタン制御
+                bool isMaster = NetworkLauncher.Instance.IsMaster;
+                if (isMaster)
+                {
+                    bool allReady = true;
+                    foreach (var p in NetworkLauncher.Instance.Runner.ActivePlayers)
+                    {
+                        if (!GameManager.Instance.IsPlayerReady(p)) { allReady = false; break; }
+                    }
+                    _startGameButton.gameObject.SetActive(true);
+                    _startGameButton.interactable = allReady;
+                }
+                else
+                {
+                    _startGameButton.gameObject.SetActive(false);
+                }
+
+                // 4人未満同意ダイアログの表示チェック（ランダムマッチかつ全員準備完了時）
+                if (!_isFriendMatch && GameManager.Instance.CurrentState == GameState.Lobby)
+                {
+                    CheckConsentDialog(playerCount);
+                }
+            }
+
+            // ゲーム開始検知
+            if (GameManager.Instance.CurrentState != GameState.Lobby && GameManager.Instance.CurrentState != GameState.Waiting)
+            {
+                gameObject.SetActive(false);
             }
         }
 
-        /// <summary>
-        /// 入室ボタンが押された
-        /// </summary>
-        public void OnJoinButtonClicked()
+        private void ShowPanel(GameObject panel)
         {
-            string roomId = _roomIdInputField != null ? _roomIdInputField.text : "";
-            
-            if (string.IsNullOrEmpty(roomId))
+            _selectionPanel.SetActive(panel == _selectionPanel);
+            _friendMatchModePanel.SetActive(panel == _friendMatchModePanel);
+            _friendMatchInputPanel.SetActive(panel == _friendMatchInputPanel);
+            _roomWaitingPanel.SetActive(panel == _roomWaitingPanel);
+        }
+
+        #region マッチング操作
+
+        private void OnRandomMatchClicked()
+        {
+            _isFriendMatch = false;
+            NetworkLauncher.Instance.StartRandomMatch(PlayerRole.None);
+            ShowWaitingPanel("ランダムマッチング中...");
+        }
+
+        private void OnHostMatchClicked()
+        {
+            _isFriendMatch = true;
+            string roomId = GenerateRoomId();
+            NetworkLauncher.Instance.StartFriendMatch(roomId, PlayerRole.None);
+            ShowWaitingPanel($"フレンドマッチ待機中\nルームID: {roomId}");
+            _roomIdText.text = $"ROOM ID: {roomId}";
+        }
+
+        private async void OnGuestMatchClicked()
+        {
+            _isFriendMatch = true;
+            await NetworkLauncher.Instance.JoinLobby();
+            ShowPanel(_friendMatchInputPanel);
+        }
+
+        private void OnSearchRoomClicked()
+        {
+            string id = _roomIdInputField.text;
+            if (string.IsNullOrEmpty(id)) return;
+            NetworkLauncher.Instance.FindFriendRoom(id);
+        }
+
+        private void OnFriendRoomFound(SessionInfo session)
+        {
+            _foundSession = session;
+            _confirmText.text = $"ルーム '{session.Name}' が見つかりました。\n参加しますか？";
+            _confirmationDialog.SetActive(true);
+        }
+
+        private void OnFriendRoomNotFound()
+        {
+            _statusText.text = "ルームが見つかりませんでした。";
+            Debug.LogWarning("Room not found");
+        }
+
+        private void OnConfirmJoinClicked()
+        {
+            _confirmationDialog.SetActive(false);
+            NetworkLauncher.Instance.StartFriendMatch(_foundSession.Name, PlayerRole.None);
+            ShowWaitingPanel($"フレンドマッチ待機中\nルームID: {_foundSession.Name}");
+            _roomIdText.text = $"ROOM ID: {_foundSession.Name}";
+        }
+
+        #endregion
+
+        #region 準備完了・同意操作
+
+        private void OnReadyClicked()
+        {
+            var player = NetworkLauncher.Instance.Runner.LocalPlayer;
+            bool currentReady = GameManager.Instance.IsPlayerReady(player);
+            GameManager.Instance.RPC_SetReady(player, !currentReady);
+        }
+
+        private void CheckConsentDialog(int playerCount)
+        {
+            if (playerCount < 4 && playerCount >= 2)
             {
-                KanjiFlipGame.Network.NetworkLauncher.Instance.StartRandomMatch(PlayerRole.None);
+                // 全員が準備完了かチェック
+                bool allReady = true;
+                foreach (var p in NetworkLauncher.Instance.Runner.ActivePlayers)
+                {
+                    if (!GameManager.Instance.IsPlayerReady(p)) { allReady = false; break; }
+                }
+
+                if (allReady && !_consentDialog.activeSelf)
+                {
+                    bool alreadyConsented = GameManager.Instance.IsPlayerConsented(NetworkLauncher.Instance.Runner.LocalPlayer);
+                    if (!alreadyConsented)
+                    {
+                        _consetText.text = $"現在 {playerCount} 人です。\nこの人数で開始してもよろしいですか？";
+                        _consentDialog.SetActive(true);
+                    }
+                }
+            }
+            else if (playerCount >= 4)
+            {
+                _consentDialog.SetActive(false);
+            }
+        }
+
+        private void OnConsentClicked(bool agreed)
+        {
+            _consentDialog.SetActive(false);
+            if (agreed)
+            {
+                GameManager.Instance.RPC_SetConsent(NetworkLauncher.Instance.Runner.LocalPlayer, true);
             }
             else
             {
-                KanjiFlipGame.Network.NetworkLauncher.Instance.StartFriendMatch(roomId, PlayerRole.None);
+                // 同意しない場合は準備完了も解除するなどの検討が必要だが、一旦解除
+                GameManager.Instance.RPC_SetReady(NetworkLauncher.Instance.Runner.LocalPlayer, false);
             }
-
-            _mainMenuPanel.SetActive(false);
-            if (_roomWaitingPanel != null) _roomWaitingPanel.SetActive(true);
-            if (_statusText != null) _statusText.text = "接続中...";
         }
 
-        /// <summary>
-        /// ホストがゲーム開始ボタンを押した
-        /// </summary>
         public void OnStartGameButtonClicked()
         {
             GameManager.Instance.Host_StartGame();
-            gameObject.SetActive(false);
+        }
+
+        #endregion
+
+        private void ShowWaitingPanel(string status)
+        {
+            ShowPanel(_roomWaitingPanel);
+            _statusText.text = status;
+            _roomIdText.text = "";
+        }
+
+        private string GenerateRoomId()
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            char[] stringChars = new char[6];
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[Random.Range(0, chars.Length)];
+            }
+            return new string(stringChars);
         }
 
         void OnDestroy()
         {
-            if (_joinButton != null)
-                _joinButton.onClick.RemoveListener(OnJoinButtonClicked);
-                
-            if (_startGameButton != null)
-                _startGameButton.onClick.RemoveListener(OnStartGameButtonClicked);
+            if (NetworkLauncher.Instance != null)
+            {
+                NetworkLauncher.Instance.OnFriendRoomFound -= OnFriendRoomFound;
+                NetworkLauncher.Instance.OnFriendRoomNotFound -= OnFriendRoomNotFound;
+            }
         }
     }
 }

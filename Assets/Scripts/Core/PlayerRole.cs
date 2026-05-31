@@ -22,7 +22,10 @@ namespace KanjiFlipGame.Core
     {
         /// <summary>待機中（マッチング前）</summary>
         Waiting,
-        
+
+        /// <summary>ロビー待機中（入室後・開始前）</summary>
+        Lobby,
+
         /// <summary>出題フェーズ（出題者がフリップを作成中）</summary>
         Questioning,
         

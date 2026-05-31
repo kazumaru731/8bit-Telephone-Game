@@ -32,6 +32,12 @@ namespace KanjiFlipGame.Core
         [Networked, Capacity(8)]
         public NetworkDictionary<PlayerRef, int> PlayerScores => default;
 
+        [Networked, Capacity(8)]
+        public NetworkDictionary<PlayerRef, NetworkBool> PlayerReadyStates => default;
+
+        [Networked, Capacity(8)]
+        public NetworkDictionary<PlayerRef, NetworkBool> PlayerConsentStates => default;
+
         // 出題キュー（Shared ModeなのでRPC経由で管理）
         private List<SubmittedFlip> _submissionQueue = new List<SubmittedFlip>();
         
@@ -50,18 +56,84 @@ namespace KanjiFlipGame.Core
         public UnityEvent<string> OnTopicChanged = new UnityEvent<string>();
         public UnityEvent<bool> OnAnswerResult = new UnityEvent<bool>();
         public UnityEvent OnScoreUpdated = new UnityEvent();
-        public UnityEvent<string> OnFlipDisplayed = new UnityEvent<string>(); // 追加
-
-        public override void Spawned()
-        {
-            if (Instance == null) Instance = this;
-            Debug.Log("GameManagerがネットワーク上に生成されました");
-        }
+        public UnityEvent<string> OnFlipDisplayed = new UnityEvent<string>();
+        public UnityEvent OnReadyStatesUpdated = new UnityEvent();
 
         private void Awake()
         {
             if (Instance == null) Instance = this;
         }
+
+        public override void Spawned()
+        {
+            if (Instance == null) Instance = this;
+            Debug.Log("GameManagerがネットワーク上に生成されました");
+            
+            // ロビー状態から開始
+            if (Object.HasStateAuthority && CurrentState == GameState.Waiting)
+            {
+                SetGameState(GameState.Lobby);
+            }
+        }
+
+        #region マッチング・準備完了管理
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        public void RPC_SetReady(PlayerRef player, NetworkBool isReady)
+        {
+            PlayerReadyStates.Set(player, isReady);
+            CheckStartConditions();
+            OnReadyStatesUpdated?.Invoke();
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        public void RPC_SetConsent(PlayerRef player, NetworkBool isConsented)
+        {
+            PlayerConsentStates.Set(player, isConsented);
+            CheckStartConditions();
+            OnReadyStatesUpdated?.Invoke();
+        }
+
+        private void CheckStartConditions()
+        {
+            if (!Object.HasStateAuthority || CurrentState != GameState.Lobby) return;
+
+            var players = Runner.ActivePlayers.ToList();
+            int playerCount = players.Count;
+            if (playerCount == 0) return;
+
+            bool allReady = players.All(p => PlayerReadyStates.TryGet(p, out var ready) && ready);
+            
+            if (allReady)
+            {
+                if (playerCount >= 4)
+                {
+                    // 4人以上なら即開始
+                    Host_StartGame();
+                }
+                else
+                {
+                    // 4人未満なら全員の同意が必要
+                    bool allConsented = players.All(p => PlayerConsentStates.TryGet(p, out var consented) && consented);
+                    if (allConsented)
+                    {
+                        Host_StartGame();
+                    }
+                }
+            }
+        }
+
+        public bool IsPlayerReady(PlayerRef player)
+        {
+            return PlayerReadyStates.TryGet(player, out var ready) && ready;
+        }
+
+        public bool IsPlayerConsented(PlayerRef player)
+        {
+            return PlayerConsentStates.TryGet(player, out var consented) && consented;
+        }
+
+        #endregion
 
         #region ゲーム進行制御
 
@@ -98,7 +170,7 @@ namespace KanjiFlipGame.Core
             var players = Runner.ActivePlayers.ToList();
             CurrentAnswerer = players[Random.Range(0, players.Count)];
             
-            // お題を自動選出（後でKanjiDatabase連携）
+            // お題を自動選出
             CurrentTopic = "太陽"; // 暫定
             
             _submissionQueue.Clear();
@@ -189,7 +261,6 @@ namespace KanjiFlipGame.Core
         {
             _submissionQueue.Add(new SubmittedFlip { Author = author, FlipDataJson = flipDataJson });
             
-            // もし誰も出題していなければ即座に回答フェーズへ
             if (CurrentState == GameState.Questioning)
             {
                 SetGameState(GameState.Answering);
@@ -225,19 +296,16 @@ namespace KanjiFlipGame.Core
             
             if (isCorrect)
             {
-                // 正解：ポイント加算
                 AddScore(CurrentAnswerer, 3);
                 if (_submissionQueue.Count > 0)
                 {
                     AddScore(_submissionQueue[0].Author, 5);
                 }
                 ShowResult(true);
-                // 次のラウンドへ（少し待機してから）
                 Invoke(nameof(StartNextRound), 3f);
             }
             else
             {
-                // 不正解：次のフリップへ
                 _submissionQueue.RemoveAt(0);
                 if (_submissionQueue.Count > 0)
                 {
@@ -245,7 +313,6 @@ namespace KanjiFlipGame.Core
                 }
                 else
                 {
-                    // キューが空なら出題待ちに戻る
                     SetGameState(GameState.Questioning);
                 }
                 OnAnswerResult?.Invoke(false);
