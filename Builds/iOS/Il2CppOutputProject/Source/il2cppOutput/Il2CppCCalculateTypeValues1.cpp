@@ -13739,7 +13739,7 @@ struct LogContext_t526F29E7A15AABE6DF35AA92F40E8BF5933C902E_marshaled_com
 	Il2CppChar* ___Prefix;
 	int32_t ___Flags;
 };
-struct U3COnGuestMatchClickedU3Ed__33_t417D9D26D0177F2B6B2D090257A1373C88FDE786 
+struct U3COnGuestMatchClickedU3Ed__34_t8170344A3E6236AA89B89364AB7FCA423F3FCF0D 
 {
 	int32_t ___U3CU3E1__state;
 	AsyncVoidMethodBuilder_t253E37B63E7E7B504878AE6563347C147F98EF2D ___U3CU3Et__builder;
@@ -14782,6 +14782,7 @@ struct MainMenuUI_t28890D9F47937AAEE30EA151292064FDE88D7540  : public MonoBehavi
 	Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* ____readyButton;
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ____readyButtonText;
 	Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* ____startGameButton;
+	Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* ____leaveRoomButton;
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ____statusText;
 	SessionInfo_t191C09E2A2B9A71925D9B0EDEA501A286FD4BCAB* ____foundSession;
 	bool ____isFriendMatch;
@@ -16283,7 +16284,7 @@ const Il2CppTypeDefinitionSizes g_typeDefinitionSize5602 = { sizeof(WarpTextExam
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize5603;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize5603 = { sizeof(AnswererUI_tFD83EBFBDE3A05F6714B082ABBCB573F42920639), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize5604;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize5604 = { sizeof(U3COnGuestMatchClickedU3Ed__33_t417D9D26D0177F2B6B2D090257A1373C88FDE786)+ sizeof(RuntimeObject), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize5604 = { sizeof(U3COnGuestMatchClickedU3Ed__34_t8170344A3E6236AA89B89364AB7FCA423F3FCF0D)+ sizeof(RuntimeObject), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize5605;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize5605 = { sizeof(MainMenuUI_t28890D9F47937AAEE30EA151292064FDE88D7540), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize5606;

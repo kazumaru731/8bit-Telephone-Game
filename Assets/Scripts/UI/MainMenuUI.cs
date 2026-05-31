@@ -50,6 +50,7 @@ namespace KanjiFlipGame.UI
         [SerializeField] private Button _readyButton;
         [SerializeField] private TextMeshProUGUI _readyButtonText;
         [SerializeField] private Button _startGameButton;
+        [SerializeField] private Button _leaveRoomButton; // 追加
         [SerializeField] private TextMeshProUGUI _statusText;
 
         private SessionInfo _foundSession;
@@ -76,6 +77,7 @@ namespace KanjiFlipGame.UI
 
             _readyButton.onClick.AddListener(OnReadyClicked);
             _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
+            _leaveRoomButton.onClick.AddListener(OnLeaveRoomClicked); // 追加
 
             // ネットワークイベントの登録
             NetworkLauncher.Instance.OnFriendRoomFound += OnFriendRoomFound;
@@ -89,7 +91,11 @@ namespace KanjiFlipGame.UI
 
         private void Update()
         {
-            if (GameManager.Instance == null || NetworkLauncher.Instance.Runner == null) return;
+            if (GameManager.Instance == null || NetworkLauncher.Instance.Runner == null)
+            {
+                // GameManagerがない場合は切断済みか初期画面
+                return;
+            }
 
             // 待機画面の更新
             if (_roomWaitingPanel.activeSelf)
@@ -190,6 +196,17 @@ namespace KanjiFlipGame.UI
             NetworkLauncher.Instance.StartFriendMatch(_foundSession.Name, PlayerRole.None);
             ShowWaitingPanel($"フレンドマッチ待機中\nルームID: {_foundSession.Name}");
             _roomIdText.text = $"ROOM ID: {_foundSession.Name}";
+        }
+
+        /// <summary>
+        /// ルームを退出して初期画面に戻る
+        /// </summary>
+        private void OnLeaveRoomClicked()
+        {
+            NetworkLauncher.Instance.Shutdown();
+            ShowPanel(_selectionPanel);
+            _confirmationDialog.SetActive(false);
+            _consentDialog.SetActive(false);
         }
 
         #endregion
