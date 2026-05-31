@@ -1866,6 +1866,136 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Log_InitInternal_m362F157397DCA1C9C99201
 		return;
 	}
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Log_Warn_mEB9C881BB834B0FC579AF7DDD0E75537A9220828 (String_t* ___0_message, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B2_0 = NULL;
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B1_0 = NULL;
+	{
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_0 = ((InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_StaticFields*)il2cpp_codegen_static_fields_for(InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var))->___LogWarn;
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		return;
+	}
+
+IL_000a:
+	{
+		String_t* L_2 = ___0_message;
+		NullCheck(G_B2_0);
+		VirtualActionInvoker1< String_t* >::Invoke(6, G_B2_0, L_2);
+		return;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Log_Warn_m02010666BF346CE4CAE0F976F4D15E8D1905C3D2 (RuntimeObject* ___0_logSource, String_t* ___1_message, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B2_0 = NULL;
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B1_0 = NULL;
+	{
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_0 = ((InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_StaticFields*)il2cpp_codegen_static_fields_for(InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var))->___LogWarn;
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		return;
+	}
+
+IL_000a:
+	{
+		RuntimeObject* L_2 = ___0_logSource;
+		String_t* L_3 = ___1_message;
+		NullCheck(G_B2_0);
+		VirtualActionInvoker2< RuntimeObject*, String_t* >::Invoke(5, G_B2_0, L_2, L_3);
+		return;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Log_Error_m16A66800D5C791B420BC15132587EC386E1289FC (String_t* ___0_message, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B2_0 = NULL;
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B1_0 = NULL;
+	{
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_0 = ((InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_StaticFields*)il2cpp_codegen_static_fields_for(InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var))->___LogError;
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		return;
+	}
+
+IL_000a:
+	{
+		String_t* L_2 = ___0_message;
+		NullCheck(G_B2_0);
+		VirtualActionInvoker1< String_t* >::Invoke(6, G_B2_0, L_2);
+		return;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Log_Error_mD70FD5D0A3B27D0766202832DA4B43DB0BDA2226 (RuntimeObject* ___0_logSource, String_t* ___1_message, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B2_0 = NULL;
+	LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* G_B1_0 = NULL;
+	{
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_0 = ((InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_StaticFields*)il2cpp_codegen_static_fields_for(InternalLogStreams_tB9CBB817CF228742F13D3BF544E90D6858E7306B_il2cpp_TypeInfo_var))->___LogError;
+		LogStream_t4F1F070A1C52AD1E5E4974369A5842BE2CF80A33* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		return;
+	}
+
+IL_000a:
+	{
+		RuntimeObject* L_2 = ___0_logSource;
+		String_t* L_3 = ___1_message;
+		NullCheck(G_B2_0);
+		VirtualActionInvoker2< RuntimeObject*, String_t* >::Invoke(5, G_B2_0, L_2, L_3);
+		return;
+	}
+}
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
